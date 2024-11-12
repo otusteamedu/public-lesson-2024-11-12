@@ -1,0 +1,52 @@
+old_sound_rabbit_mq:
+    connections:
+        default:
+            url: '%env(RABBITMQ_URL)%'
+    producers:
+        consume_test:
+            connection: default
+            exchange_options: {name: consume_test, type: fanout}
+        consume_test.failed_requeue:
+            connection: default
+            exchange_options: {name: consume_test.failed_requeue, type: fanout}
+        consume_test.pending:
+            connection: default
+            exchange_options: {name: consume_test.pending, type: fanout}
+        produce_test.start:
+            connection: default
+            exchange_options: {name: produce_test.start, type: fanout}
+
+    consumers:
+        ## requeue to the same queue
+        consume_test.requeue:
+            connection: default
+            exchange_options: { name: consume_test, type: fanout }
+            queue_options: { name: consume_test.requeue }
+            callback: App\Controller\Amqp\Requeue\ConsumerRequeue
+            qos_options: {prefetch_size: 0, prefetch_count: 1, global: false}
+        ## resend to failed queue & requeue back after repeated fail
+        consume_test.requeue_failed:
+            connection: default
+            exchange_options: { name: consume_test, type: fanout }
+            queue_options: { name: consume_test.requeue_failed }
+            callback: App\Controller\Amqp\ResendToFailedQueue\Consumer
+            qos_options: {prefetch_size: 0, prefetch_count: 1, global: false}
+        consume_test.requeue_failed.process:
+            connection: default
+            exchange_options: { name: consume_test.failed_requeue, type: fanout }
+            queue_options: { name: consume_test.failed_requeue.process }
+            callback: App\Controller\Amqp\Requeue\ConsumerRequeueFailed
+            qos_options: {prefetch_size: 0, prefetch_count: 1, global: false}
+        ## resend to failed queue trigger to process pending messages & resend it back after repeated fail
+        consume_test.resend_failed:
+            connection: default
+            exchange_options: { name: consume_test, type: fanout }
+            queue_options: { name: consume_test.resend_failed }
+            callback: App\Controller\Amqp\ResendToFailedQueueWithPreprocess\Consumer
+            qos_options: {prefetch_size: 0, prefetch_count: 1, global: false}
+        consume_test.pending:
+            connection: default
+            exchange_options: { name: consume_test.pending, type: fanout }
+            queue_options: { name: consume_test.pending }
+            callback: App\Controller\Amqp\ProcessPending\Consumer
+            qos_options: {prefetch_size: 0, prefetch_count: 1, global: false}

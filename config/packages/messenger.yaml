@@ -1,0 +1,70 @@
+framework:
+    messenger:
+        serializer:
+            default_serializer: messenger.transport.symfony_serializer
+            symfony_serializer:
+                format: json
+
+        buses:
+            messenger.bus.default:
+                middleware:
+                    - doctrine_ping_connection
+                    - doctrine_close_connection
+                    - doctrine_transaction
+
+        transports:
+            doctrine:
+                dsn: "%env(MESSENGER_DOCTRINE_TRANSPORT_DSN)%"
+                serializer: 'messenger.transport.symfony_serializer'
+            consume_test.outgoing:
+                dsn: "%env(MESSENGER_AMQP_TRANSPORT_DSN)%"
+                options:
+                    exchange:
+                        name: consume_test
+                        type: fanout
+            consume_test.incoming.requeue:
+                dsn: "%env(MESSENGER_AMQP_TRANSPORT_DSN)%"
+                options:
+                    exchange:
+                        name: consume_test
+                        type: fanout
+                    queues:
+                        consume_test.requeue:
+                retry_strategy:
+                    delay: 0
+            consume_test.incoming.requeue_failed:
+                dsn: "%env(MESSENGER_AMQP_TRANSPORT_DSN)%"
+                options:
+                    exchange:
+                        name: consume_test
+                        type: fanout
+                    queues:
+                        consume_test.requeue_failed:
+                retry_strategy:
+                    delay: 0
+            consume_test.outgoing.requeue_failed:
+                dsn: "%env(MESSENGER_AMQP_TRANSPORT_DSN)%"
+                options:
+                    exchange:
+                        name: consume_test.requeue_failed
+                        type: fanout
+            consume_resend_failed:
+                dsn: "%env(MESSENGER_AMQP_TRANSPORT_DSN)%"
+                options:
+                    exchange:
+                        name: consume_test
+                        type: fanout
+                    queues:
+                        consume_requeue_failed:
+            consume_failed_requeue_failed:
+                dsn: "%env(MESSENGER_AMQP_TRANSPORT_DSN)%"
+                options:
+                    exchange:
+                        name: consume_failed
+                        type: fanout
+                    queues:
+                        consume_failed_requeue_failed:
+
+        routing:
+            'App\DTO\ConsumeTestMessage': consume_test.outgoing
+            'App\Controller\Amqp\Requeue\Message': consume_test.incoming.requeue

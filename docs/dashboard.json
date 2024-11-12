@@ -1,0 +1,666 @@
+﻿{
+  "annotations": {
+    "list": [
+      {
+        "builtIn": 1,
+        "datasource": {
+          "type": "grafana",
+          "uid": "-- Grafana --"
+        },
+        "enable": true,
+        "hide": true,
+        "iconColor": "rgba(0, 211, 255, 1)",
+        "name": "Annotations & Alerts",
+        "type": "dashboard"
+      }
+    ]
+  },
+  "editable": true,
+  "fiscalYearStartMonth": 0,
+  "graphTooltip": 0,
+  "id": 2,
+  "links": [],
+  "panels": [
+    {
+      "datasource": {
+        "type": "graphite",
+        "uid": "ee3qgkkx3n1tsd"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green"
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "movingSum(stats_counts.my_app.user1_requeue_processed,\"1hour\")"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Requeue, 25% success"
+              },
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "dark-purple",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "movingSum(stats_counts.my_app.user2_requeue_processed,\"1hour\")"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Requeue, 40% success"
+              },
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "light-purple",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "movingSum(stats_counts.my_app.user3_requeue_processed,\"1hour\")"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Requeue, 100% success"
+              },
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "light-blue",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "movingSum(stats_counts.my_app.user1_requeueFailed_processed,\"1hour\")"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Delayed queue, 25% success"
+              },
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "dark-green",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "movingSum(stats_counts.my_app.user2_requeueFailed_processed,\"1hour\")"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Delayed queue, 40% success"
+              },
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "green",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "movingSum(stats_counts.my_app.user3_requeueFailed_processed,\"1hour\")"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Delayed queue, 100% success"
+              },
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "light-yellow",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "movingSum(stats_counts.my_app.user1_resendFailed_processed,\"1hour\")"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Transactional inbox, 25% success"
+              },
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "dark-red",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "movingSum(stats_counts.my_app.user2_resendFailed_processed,\"1hour\")"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Transactional inbox, 40% success"
+              },
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "light-red",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "movingSum(stats_counts.my_app.user3_resendFailed_processed,\"1hour\")"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Transactional inbox, 100% success"
+              },
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "orange",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 17,
+        "w": 24,
+        "x": 0,
+        "y": 0
+      },
+      "id": 1,
+      "options": {
+        "legend": {
+          "calcs": [
+            "last"
+          ],
+          "displayMode": "table",
+          "placement": "right",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "graphite",
+            "uid": "ee3qgkkx3n1tsd"
+          },
+          "refCount": 0,
+          "refId": "A",
+          "target": "movingSum(stats_counts.my_app.user1_requeue_processed, '1hour')",
+          "textEditor": false
+        },
+        {
+          "datasource": {
+            "type": "graphite",
+            "uid": "ee3qgkkx3n1tsd"
+          },
+          "hide": false,
+          "refCount": 0,
+          "refId": "B",
+          "target": "movingSum(stats_counts.my_app.user2_requeue_processed, '1hour')",
+          "textEditor": false
+        },
+        {
+          "datasource": {
+            "type": "graphite",
+            "uid": "ee3qgkkx3n1tsd"
+          },
+          "hide": false,
+          "refCount": 0,
+          "refId": "C",
+          "target": "movingSum(stats_counts.my_app.user3_requeue_processed, '1hour')",
+          "textEditor": false
+        },
+        {
+          "datasource": {
+            "type": "graphite",
+            "uid": "ee3qgkkx3n1tsd"
+          },
+          "hide": false,
+          "refCount": 0,
+          "refId": "D",
+          "target": "movingSum(stats_counts.my_app.user1_requeueFailed_processed, '1hour')",
+          "textEditor": false
+        },
+        {
+          "datasource": {
+            "type": "graphite",
+            "uid": "ee3qgkkx3n1tsd"
+          },
+          "hide": false,
+          "refCount": 0,
+          "refId": "E",
+          "target": "movingSum(stats_counts.my_app.user2_requeueFailed_processed, '1hour')",
+          "textEditor": false
+        },
+        {
+          "datasource": {
+            "type": "graphite",
+            "uid": "ee3qgkkx3n1tsd"
+          },
+          "hide": false,
+          "refCount": 0,
+          "refId": "F",
+          "target": "movingSum(stats_counts.my_app.user3_requeueFailed_processed, '1hour')",
+          "textEditor": false
+        },
+        {
+          "datasource": {
+            "type": "graphite",
+            "uid": "ee3qgkkx3n1tsd"
+          },
+          "hide": false,
+          "refCount": 0,
+          "refId": "G",
+          "target": "movingSum(stats_counts.my_app.user1_resendFailed_processed, '1hour')",
+          "textEditor": true
+        },
+        {
+          "datasource": {
+            "type": "graphite",
+            "uid": "ee3qgkkx3n1tsd"
+          },
+          "hide": false,
+          "refCount": 0,
+          "refId": "H",
+          "target": "movingSum(stats_counts.my_app.user2_resendFailed_processed, '1hour')",
+          "textEditor": false
+        },
+        {
+          "datasource": {
+            "type": "graphite",
+            "uid": "ee3qgkkx3n1tsd"
+          },
+          "hide": false,
+          "refCount": 0,
+          "refId": "I",
+          "target": "movingSum(stats_counts.my_app.user3_resendFailed_processed, '1hour')",
+          "textEditor": false
+        }
+      ],
+      "title": "Panel Title",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "graphite",
+        "uid": "ee3qgkkx3n1tsd"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 9,
+        "x": 0,
+        "y": 17
+      },
+      "id": 2,
+      "options": {
+        "legend": {
+          "calcs": [
+            "max"
+          ],
+          "displayMode": "table",
+          "placement": "right",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "graphite",
+            "uid": "ee3qgkkx3n1tsd"
+          },
+          "refCount": 0,
+          "refId": "A",
+          "target": "sumSeries(stats_counts.my_app.user1_error)",
+          "textEditor": true
+        },
+        {
+          "datasource": {
+            "type": "graphite",
+            "uid": "ee3qgkkx3n1tsd"
+          },
+          "hide": false,
+          "refCount": 0,
+          "refId": "B",
+          "target": "sumSeries(stats_counts.my_app.user2_error)",
+          "textEditor": true
+        },
+        {
+          "datasource": {
+            "type": "graphite",
+            "uid": "ee3qgkkx3n1tsd"
+          },
+          "hide": false,
+          "refCount": 0,
+          "refId": "C",
+          "target": "sumSeries(stats_counts.my_app.user3_error)",
+          "textEditor": true
+        }
+      ],
+      "title": "Panel Title",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "graphite",
+        "uid": "ee3qgkkx3n1tsd"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "movingSum(stats_counts.my_app.outbox_processed,\"1hour\")"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Put to outbox"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "movingSum(stats_counts.my_app.transaction_processed,\"1hour\")"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Publish in transaction"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "movingSum(stats_counts.my_app.publish_processed,\"1hour\")"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Publish from outbox"
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 15,
+        "w": 24,
+        "x": 0,
+        "y": 24
+      },
+      "id": 3,
+      "options": {
+        "legend": {
+          "calcs": [
+            "last"
+          ],
+          "displayMode": "table",
+          "placement": "right",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "graphite",
+            "uid": "ee3qgkkx3n1tsd"
+          },
+          "refCount": 0,
+          "refId": "A",
+          "target": "movingSum(stats_counts.my_app.outbox_processed, '1hour')",
+          "textEditor": true
+        },
+        {
+          "datasource": {
+            "type": "graphite",
+            "uid": "ee3qgkkx3n1tsd"
+          },
+          "hide": false,
+          "refCount": 0,
+          "refId": "B",
+          "target": "movingSum(stats_counts.my_app.transaction_processed, '1hour')",
+          "textEditor": true
+        },
+        {
+          "datasource": {
+            "type": "graphite",
+            "uid": "ee3qgkkx3n1tsd"
+          },
+          "hide": false,
+          "refCount": 0,
+          "refId": "C",
+          "target": "movingSum(stats_counts.my_app.publish_processed, '1hour')",
+          "textEditor": true
+        }
+      ],
+      "title": "Panel Title",
+      "type": "timeseries"
+    }
+  ],
+  "refresh": "",
+  "schemaVersion": 39,
+  "tags": [],
+  "templating": {
+    "list": []
+  },
+  "time": {
+    "from": "2024-11-12T15:53:56.332Z",
+    "to": "2024-11-12T15:55:21.702Z"
+  },
+  "timepicker": {},
+  "timezone": "browser",
+  "title": "Transactional Patterns for Message Processing",
+  "uid": "ae3ns6s6uvhfke",
+  "version": 3,
+  "weekStart": ""
+}
